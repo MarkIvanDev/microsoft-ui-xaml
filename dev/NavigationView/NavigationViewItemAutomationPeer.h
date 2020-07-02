@@ -62,5 +62,4 @@ private:
     int32_t GetPositionOrSetCountInLeftNavHelper(AutomationOutput automationOutput);
     int32_t GetPositionOrSetCountInTopNavHelper(AutomationOutput automationOutput);
     void ChangeSelection(bool isSelected);
-    bool HasChildren();
 };

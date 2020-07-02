@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using MUXControlsTestApp.Utilities;
@@ -46,15 +46,8 @@ namespace Windows.UI.Xaml.Tests.MUXControls.ApiTests
                 tabView.SelectedItem = tabView.TabItems[0];
                 (tabView.SelectedItem as TabViewItem).IsSelected = true;
                 Verify.AreEqual("Item 0", (tabView.SelectedItem as TabViewItem).Header);
-                Content.UpdateLayout();
-            });
-            // Waiting for layout
-            IdleSynchronizer.Wait();
-
-            RunOnUIThread.Execute(() =>
-            {
-                // Now set tab width mode
                 tabView.TabWidthMode = TabViewWidthMode.Compact;
+                Content.UpdateLayout();
             });
 
             IdleSynchronizer.Wait();
@@ -89,23 +82,14 @@ namespace Windows.UI.Xaml.Tests.MUXControls.ApiTests
             foreach (var item in items)
             {
                 var tabItem = item as TabViewItem;
-                var rootGrid = VisualTreeHelper.GetChild(tabItem, 0) as FrameworkElement;
-
-                foreach (var group in VisualStateManager.GetVisualStateGroups(rootGrid))
+                if (tabItem.IsSelected || !isCompact)
                 {
-                    if (group.Name == "TabWidthModes")
-                    {
-                        if(tabItem.IsSelected || !isCompact)
-                        {
-                            Verify.AreEqual("StandardWidth", group.CurrentState.Name, "Verify that this tab item is rendering in standard width");
-                        }
-                        else
-                        {
-                            Verify.AreEqual("Compact", group.CurrentState.Name, "Verify that this tab item is rendering in compact width");
-                        }
-                    }
+                    VisualStateHelper.ContainsVisualState(tabItem, "StandardWidth");
                 }
-
+                else
+                {
+                    VisualStateHelper.ContainsVisualState(tabItem, "Compact");
+                }
             }
         }
 

@@ -119,7 +119,7 @@ namespace Windows.UI.Xaml.Tests.MUXControls.ApiTests
                 try
                 {
                     Log.Comment($"Verify visual tree for {control}");
-                    VisualTreeTestHelper.VerifyVisualTree(xaml: XamlStringForControl(control), verificationFileNamePrefix: control);
+                    VisualTreeTestHelper.VerifyVisualTree(xaml: XamlStringForControl(control), masterFilePrefix: control);
                 }
                 catch (Exception e)
                 {
@@ -175,7 +175,7 @@ namespace Windows.UI.Xaml.Tests.MUXControls.ApiTests
             var visualTreeDumperFilter = new VisualTreeDumper.DefaultFilter();
             visualTreeDumperFilter.PropertyNameAllowedList.Remove("MaxWidth");
             visualTreeDumperFilter.PropertyNameAllowedList.Remove("MaxHeight");
-            VisualTreeTestHelper.VerifyVisualTree(root: overflowContent, verificationFileNamePrefix: "CommandBarOverflowMenu", filter: visualTreeDumperFilter);
+            VisualTreeTestHelper.VerifyVisualTree(root: overflowContent, masterFilePrefix: "CommandBarOverflowMenu", filter: visualTreeDumperFilter);
         }
 
         private string XamlStringForControl(string controlName)
@@ -213,7 +213,7 @@ namespace Windows.UI.Xaml.Tests.MUXControls.ApiTests
                             </StackPanel>
                        </Grid>";
             VisualTreeTestHelper.VerifyVisualTree(xaml: xaml, 
-                verificationFileNamePrefix: "VerifyVisualTreeForAppBarAndAppBarToggleButton");
+                masterFilePrefix: "VerifyVisualTreeForAppBarAndAppBarToggleButton");
         }
 
         [TestMethod]
@@ -227,7 +227,7 @@ namespace Windows.UI.Xaml.Tests.MUXControls.ApiTests
             var xaml = @"<Grid Width='400' Height='400' xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'> 
                        </Grid>";
             VisualTreeTestHelper.VerifyVisualTree(xaml: xaml, 
-                verificationFileNamePrefix: "VerifyVisualTreeExampleLoadAndVerifyForAllThemes",
+                masterFilePrefix: "VerifyVisualTreeExampleLoadAndVerifyForAllThemes",
                 theme: Theme.All);
         }
 
@@ -247,7 +247,7 @@ namespace Windows.UI.Xaml.Tests.MUXControls.ApiTests
                 (root as FrameworkElement).RequestedTheme = ElementTheme.Dark;
             });
             VisualTreeTestHelper.VerifyVisualTree(root: root,
-                verificationFileNamePrefix: "VerifyVisualTreeExampleLoadAndVerifyForDarkThemeWithCustomName");
+                masterFilePrefix: "VerifyVisualTreeExampleLoadAndVerifyForDarkThemeWithCustomName");
         }
 
         [TestMethod]
@@ -262,7 +262,7 @@ namespace Windows.UI.Xaml.Tests.MUXControls.ApiTests
                        </Grid>";
             UIElement root = VisualTreeTestHelper.SetupVisualTree(xaml);
             VisualTreeTestHelper.VerifyVisualTree(root: root,
-                verificationFileNamePrefix: "VerifyVisualTreeExampleForLightTheme",
+                masterFilePrefix: "VerifyVisualTreeExampleForLightTheme",
                 theme: Theme.Light);
         }
 
@@ -280,7 +280,7 @@ namespace Windows.UI.Xaml.Tests.MUXControls.ApiTests
                        </Grid>";
 
             VisualTreeTestHelper.VerifyVisualTree(xaml: xaml,
-                verificationFileNamePrefix: "VerifyVisualTreeExampleWithCustomerFilter",
+                masterFilePrefix: "VerifyVisualTreeExampleWithCustomerFilter",
                 filter: new CustomizedFilter());
         }
 
@@ -298,7 +298,7 @@ namespace Windows.UI.Xaml.Tests.MUXControls.ApiTests
                        </Grid>";
 
             VisualTreeTestHelper.VerifyVisualTree(xaml: xaml,
-                verificationFileNamePrefix: "VerifyVisualTreeExampleWithCustomerPropertyValueTranslator",
+                masterFilePrefix: "VerifyVisualTreeExampleWithCustomerPropertyValueTranslator",
                 translator: new CustomizedTranslator());
         }
 

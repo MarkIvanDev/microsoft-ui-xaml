@@ -88,7 +88,6 @@ void TabViewItem::OnApplyTemplate()
     }
 
     UpdateCloseButton();
-    UpdateWidthModeVisualState();
 }
 
 void TabViewItem::OnIsSelectedPropertyChanged(const winrt::DependencyObject& sender, const winrt::DependencyProperty& args)

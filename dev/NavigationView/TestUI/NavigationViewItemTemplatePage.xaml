@@ -9,22 +9,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
+    <Grid Background="Plum">
         <Grid.Resources>
             <local:Customers x:Key="customers"/>
         </Grid.Resources>
-        <Button AutomationProperties.Name="FocusAnchorButton">I'm just for grabbing focus</Button>
         <controls:NavigationView 
             x:Name="NavView" 
             PaneDisplayMode="Top"
-            SelectionChanged="NavView_SelectionChanged"
-            MenuItemsSource="{StaticResource customers}"
-            Grid.Row="1">
+            MenuItemsSource="{StaticResource customers}">
             <controls:NavigationView.MenuItemTemplate>
               <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -36,7 +28,6 @@
 
             <StackPanel Orientation="Vertical" Margin="8,0,0,0">
                 <Button x:Name="FlipOrientation" AutomationProperties.Name="FlipOrientationButton" Content="Flip Orientation" Click="FlipOrientation_Click"/>
-                <TextBlock x:Name="SelectionEventResult" AutomationProperties.Name="SelectionEventResult"></TextBlock>
             </StackPanel>
         </controls:NavigationView>
     </Grid>
